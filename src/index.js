@@ -4,18 +4,16 @@ import { smiley1, smiley2 } from "./smiley";
 
 var d3 = require("d3");
 
-console.log("HELLO");
-
-setTimeout(() => {
+var mainFunction = () => {
   var se = $.parseHTML(
     `
     <div id="s1">
       <div id="s1o">` +
-      smiley1 +
-      `</div>
+    smiley1 +
+    `</div>
       <div id="s1c">` +
-      smiley2 +
-      `</div>
+    smiley2 +
+    `</div>
     </div>
     `
   );
@@ -58,4 +56,6 @@ setTimeout(() => {
   tof();
 
   console.log("CREATED");
-}, 1000);
+};
+
+setTimeout(mainFunction, 1000);

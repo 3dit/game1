@@ -1,7 +1,7 @@
 {
-  "name": "vanilla",
-  "version": "1.0.0",
-  "description": "JavaScript example starter project",
+  "name": "Gabe's Game Project",
+  "version": "1.0.1",
+  "description": "Starting Javascript game programming",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",

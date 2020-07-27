@@ -1,17 +1,16 @@
-import "./styles.css";
 import $ from "jquery";
 import { smiley1, smiley2 } from "./smiley";
 
 var d3 = require("d3");
 
-var mainFunction = () => {
+function mainFunction() {
   var se = $.parseHTML(
     `
     <div id="s1">
       <div id="s1o">` +
     smiley1 +
     `</div>
-      <div id="s1c">` +
+      <div id="s1c">` + 
     smiley2 +
     `</div>
     </div>

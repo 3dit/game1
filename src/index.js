@@ -58,4 +58,4 @@ var mainFunction = () => {
   console.log("CREATED");
 };
 
-setTimeout(mainFunction, 1000);
+setTimeout(mainFunction, 100);

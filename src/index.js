@@ -1,60 +1,33 @@
-import $ from "jquery";
-import { smiley1, smiley2 } from "./smiley";
+import * as PIXI from 'pixi.js';
 
-var d3 = require("d3");
+// The application will create a renderer using WebGL, if possible,
+// with a fallback to a canvas render. It will also setup the ticker
+// and the root stage PIXI.Container
+const app = new PIXI.Application();
 
-function mainFunction() {
-  var se = $.parseHTML(
-    `
-    <div id="s1">
-      <div id="s1o">` +
-    smiley1 +
-    `</div>
-      <div id="s1c">` + 
-    smiley2 +
-    `</div>
-    </div>
-    `
-  );
-  $("body").append(se);
-  var seo = $("#s1");
-  var s1o = $("#s1o");
-  var s1c = $("#s1c");
+// The application will create a canvas element for you that you
+// can then insert into the DOM
+document.body.appendChild(app.view);
 
-  s1o.css("position", "absolute");
-  s1o.css("left", "50px");
-  s1o.css("top", "50px");
+// load the texture we need
+app.loader.add('bunny', 'bunny.png').load((loader, resources) => {
+    // This creates a texture from a 'bunny.png' image
+    const bunny = new PIXI.Sprite(resources.bunny.texture);
 
-  s1c.css("position", "absolute");
-  s1c.css("left", "50px");
-  s1c.css("top", "50px");
+    // Setup the position of the bunny
+    bunny.x = app.renderer.width / 2;
+    bunny.y = app.renderer.height / 2;
 
-  var cnt = 150;
+    // Rotate around the center
+    bunny.anchor.x = 0.5;
+    bunny.anchor.y = 0.5;
 
-  var tof = (s1o, s1c) => {
-    var s1o = $("#s1o");
-    var s1c = $("#s1c");
-    var bp = cnt - parseInt(cnt / 10) * 10;
-    var ps = bp % 2 === 0 ? 0.99 : 0.2;
+    // Add the bunny to the scene we are building
+    app.stage.addChild(bunny);
 
-    if (Math.random() > ps) {
-      s1o.css("display", "block");
-      s1c.css("display", "none");
-    } else {
-      s1o.css("display", "none");
-      s1c.css("display", "block");
-    }
-    if (cnt-- > 0) setTimeout(tof, 100);
-    else if (cnt === -1) {
-      cnt = 150;
-      setTimeout(tof, 5000);
-    } else {
-    }
-  };
-
-  tof();
-
-  console.log("CREATED");
-};
-
-setTimeout(mainFunction, 100);
+    // Listen for frame updates
+    app.ticker.add(() => {
+         // each frame we spin the bunny around a bit
+        bunny.rotation += 0.01;
+    });
+});

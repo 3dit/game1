@@ -10,53 +10,29 @@ const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 let myGame = (loader,resources) => {
-    // This creates a texture from a 'bunny.png' image
-    const bunny = new PIXI.Sprite(resources.bunny.texture);
+    // This creates a texture from a 'test.png' image
+    const dude = new PIXI.Sprite(resources.dude.texture);
 
-    // Setup the position of the bunny
-    bunny.x = app.renderer.width / 2;
-    bunny.y = app.renderer.height / 2;
+    // Setup the position of the dude
+    dude.x = app.renderer.width / 2;
+    dude.y = app.renderer.height / 2;
 
     // Rotate around the center
-    bunny.anchor.x = 0.5;
-    bunny.anchor.y = 0.5;
+    dude.anchor.x = 0.5;
+    dude.anchor.y = 0.5;
 
-    let x = 200;
-    let y = 250;
-    let xv = 2.5;
-    let yv = 1.9;
-    let width = 800;
-    let height = 600;
-
-    // Add the bunny to the scene we are building
-    app.stage.addChild(bunny);
+    // Add the dude to the scene we are building
+    app.stage.addChild(dude);
 
     // Listen for frame updates
     app.ticker.add(function run() {
-         // each frame we spin the bunny around a bit
-        bunny.rotation += 0.01;
-
-        if(x + xv + bunny.width/2 > width) {
-          xv = -xv;
-        } else if(x + xv  < bunny.width/2) {
-          xv = -xv;
-        }
-        x = x + xv;
-
-        if(y + yv + bunny.height/2 > height) {
-          yv =- yv;
-        } else if(y + yv < bunny.height/2) {
-          yv = -yv;
-        }
-        y += yv;
-
-        bunny.x = x;
-        bunny.y = y;
+         // each frame we spin the dude around a bit
+        dude.rotation += 0.01;
     });
 
 }
 
 // load the texture we need
 let appLoader = app.loader;
-appLoader.add('bunny', 'test.png');
+appLoader.add('dude', 'test.png');
 appLoader.load(myGame);

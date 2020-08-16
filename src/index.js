@@ -41,8 +41,8 @@ let gameStartupFunction = function (loader, resources) {
     dude.y = 600;
     dude.anchor.x = 0.5;
     dude.anchor.y = .5;
-    dude.width = 200;
-    dude.height = 200;
+    dude.width = 50;
+    dude.height = 100;
     dude.zIndex = 10;
 
     tv.x = 400;
@@ -59,7 +59,7 @@ let gameStartupFunction = function (loader, resources) {
     cactus.height = 82;
 
     let growthRate = .009;
-    let updateRate = 500;
+    let updateRate = 300;
     setInterval(() => { cactus.height+=growthRate; cactus.y-=growthRate;},updateRate);
 
     haybale.x = -20;

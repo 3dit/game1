@@ -1,15 +1,13 @@
 import * as PIXI from 'pixi.js';
+import { isCollidingWith, getPushDirection, applyForce } from './collider.js';
 
 let app = new PIXI.Application({
     width: 800, height: 600, backgroundColor: 0xf2e999, resolution: window.devicePixelRatio || 1,
 });
-//0 1 2 3 4 5 6 7 8 9 a b c d e f
 
 let dude = '';
 let coin = '';
 let guy = [];
-let guy_pos_x = 240;
-let guy_pos_y = 150;
 let guy_counter = 1;
 let tomfarm = '';
 let tv = '';
@@ -46,7 +44,7 @@ let gameStartupFunction = function (loader, resources) {
     dude.zIndex = 10;
 
     tv.x = 400;
-    tv.y = 50;
+    tv.y = 100;
     tv.width = 150;
     tv.height = 150;
     tv.zindex = 2;
@@ -58,9 +56,9 @@ let gameStartupFunction = function (loader, resources) {
     cactus.width = 50;
     cactus.height = 82;
 
-    let growthRate = .009;
-    let updateRate = 300;
-    setInterval(() => { cactus.height+=growthRate; cactus.y-=growthRate;},updateRate);
+    let cactusGrowthRate = .009;
+    let cactusUpdateRate = 300;
+    setInterval(() => { cactus.height+=cactusGrowthRate; cactus.y-=cactusGrowthRate;},cactusUpdateRate);
 
     haybale.x = -20;
     haybale.y = 150;
@@ -72,14 +70,14 @@ let gameStartupFunction = function (loader, resources) {
     coin.y = app.renderer.height / 6;
     coin.anchor.x = 0.5;
     coin.anchor.y = 0.5;
-    coin.width = 175;
-    coin.height = 175;
+    coin.width = 15;
+    coin.height = 15;
     coin.zIndex = 1;
 
-    tomfarm.x = -100;
-    tomfarm.y = -110;
-    tomfarm.width = 400;
-    tomfarm.height = 400;
+    tomfarm.x = 12;
+    tomfarm.y = -4;
+    tomfarm.width = 240;
+    tomfarm.height = 240;
     tomfarm.zIndex = 0;
 
     guy[1].anchor.x = .5;
@@ -88,11 +86,10 @@ let gameStartupFunction = function (loader, resources) {
     guy[2].anchor.y = .5;
     guy[1].visible = false;
     guy[2].visible = false;
-
-    guy[1].width = guy[2].width = 200;
-    guy[1].height = guy[2].height = 200;
-    guy[1].x = guy[2].x = guy_pos_x;
-    guy[1].y = guy[2].y = guy_pos_y;
+    guy[1].width = guy[2].width = 23*3;
+    guy[1].height = guy[2].height = 27*3;
+    guy[1].x = guy[2].x = 210;
+    guy[1].y = guy[2].y = 200;
     guy[1].zIndex = guy[2].zIndex = 9;
 
     // Add the dude to the scene we are building
@@ -122,6 +119,9 @@ app.loader.add('cactus', 'spiky_thing.png');
 
 app.loader.load(gameStartupFunction);
 
+let collidingState = false;
+let lastCollidingState = collidingState;
+
 let gt1 = 50;
 let gt2 = 100;
 function eventLoop() {
@@ -150,8 +150,16 @@ function eventLoop() {
     if(dude.y - dude.height / 2 > guy[1].y) {
         dude.zIndex = 10;
         guy[1].zIndex = guy[2].zIndex = 9;
-    }
+    } 
 
+    collidingState = isCollidingWith(dude,guy[1]);
+    if(collidingState != lastCollidingState)  {
+        console.log(collidingState ? 'Colliding' : 'Not');
+        lastCollidingState = collidingState;
+        let angle = getPushDirection(dude, guy[1]);
+        applyForce(guy, angle, 5);
+    }  
+    
 }
 
 let speed = 20;

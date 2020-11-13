@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "node --experimental-modules node_modules/parcel-bundler/bin/cli.js index.html --open",
-    "build": "node node_modules/parcel-bundler/bin/cli.js build index.html"
+    "build": "node --experimental-modules node_modules/parcel-bundler/bin/cli.js build index.html"
   },
   "dependencies": {
     "d3": "5.16.0",

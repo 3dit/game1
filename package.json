@@ -4,8 +4,8 @@
   "description": "Starting Javascript game programming",
   "main": "index.html",
   "scripts": {
-    "start": "node_modules/parcel-bundler/bin/cli.js index.html --open",
-    "build": "node_modules/parcel-bundler/bin/cli.js build index.html"
+    "start": "node node_modules/parcel-bundler/bin/cli.js index.html --open",
+    "build": "node node_modules/parcel-bundler/bin/cli.js build index.html"
   },
   "dependencies": {
     "d3": "5.16.0",

@@ -5,6 +5,8 @@ let app = new PIXI.Application({
     width: 800, height: 600, backgroundColor: 0xf2e999, resolution: window.devicePixelRatio || 1,
 });
 
+console.log('app',app);
+
 let dude = '';
 let coin = '';
 let guy = [];

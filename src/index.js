@@ -6,7 +6,7 @@ let app = new PIXI.Application({
 });
 
 console.log('app',app);
-console.log('%cWelcome Back!', 'font-size:20px;font-weight:bold;');
+console.log('%cWelcome Back!', 'font-size:20px;font-weight:bold;color:green;');
 
 let dude = '';
 let coin = '';
